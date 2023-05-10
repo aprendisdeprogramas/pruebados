@@ -129,7 +129,7 @@ nav ul li a:hover {
 .btn {
     /* estilos anteriores */
     top: calc(57% + 250px);
-    left: calc(17% + 20px);
+    left: calc(20% + 20px);
 }
 @media screen and (max-width: 768px) {
     /* Estilos para pantallas más pequeñas */
