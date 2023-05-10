@@ -141,6 +141,42 @@ navLinks.forEach((link, index) => {
         setActiveLink(index);
     });
 });
+// Código JavaScript existente
+// ...
+
+// Agrega el nuevo código al final del archivo
+let bgChangeInterval;
+let bgState = 1;
+
+function changeBackground() {
+  if (bgState === 1) {
+    document.documentElement.style.setProperty('--bg1-opacity', '0');
+    document.documentElement.style.setProperty('--bg2-opacity', '1');
+    bgState = 2;
+  } else {
+    document.documentElement.style.setProperty('--bg1-opacity', '1');
+    document.documentElement.style.setProperty('--bg2-opacity', '0');
+    bgState = 1;
+  }
+}
+
+function startBackgroundChange() {
+  bgChangeInterval = setInterval(changeBackground, 1000);
+}
+
+function stopBackgroundChange() {
+  clearInterval(bgChangeInterval);
+}
+
+startBackgroundChange();
+
+
+
+
+
+
+
+
 
 
 
