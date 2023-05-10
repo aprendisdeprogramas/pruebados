@@ -243,6 +243,14 @@ h1 {
     padding: 10px;
   }
 }
+@media screen and (max-width: 768px) {
+  .btn {
+    top: calc(57% + 50px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 
 
 
