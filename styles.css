@@ -1,60 +1,68 @@
+
 body, html {
-    background-image: url(img/img2.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position-y: 50px;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5em;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  background-image: url(img/img2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: 50px;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 header {
-    background-color: black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .logo img {
-    height: 50px;
+  height: 50px;
 }
 
 nav ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start; /* Alinea los elementos a la izquierda */
+  align-items: center;
+  padding-left: 20px; /* Agrega un poco de padding al lado izquierdo */
 }
 
 nav ul li {
-    margin: 0 10px;
+  margin: 0 20px; /* Aumenta la separación horizontal */
 }
 
 nav ul li a {
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+  display: inline-block;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-right: 20px; /* Agrega separación adicional entre elementos */
 }
 
 nav ul li a:hover {
-    background-color: #00c5cd;
+  background-color: #00c5cd;
 }
 .btn {
     background-color: #00c5cd;
@@ -77,7 +85,7 @@ nav ul li a:hover {
 .btn {
     /* estilos anteriores */
     top: calc(50% + 250px);
-    left: calc(19% + 20px);
+    left: calc(18% + 20px);
 }
 @media screen and (max-width: 768px) {
     /* Estilos para pantallas más pequeñas */
@@ -104,6 +112,76 @@ nav ul li a:hover {
     }
     
   }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav ul li a {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+nav ul li:not(:last-child) {
+    margin-right: 10px;
+}
+nav ul {
+  /* Estilos anteriores */
+  position: relative;
+}
+
+.nav-link {
+  /* Nuevos estilos */
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.nav-link::before {
+  /* Nuevos estilos */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(0.8);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: -1;
+}
+
+.nav-link:hover::before {
+  /* Nuevos estilos */
+  transform: scale(1);
+  opacity: 1;
+}
+
+.nav-link:active {
+  /* Nuevos estilos */
+  transform: scale(1.2);
+}
+nav ul li a:hover {
+  background-color: #00c5cd;
+  transform: scale(1.1);
+}
+
+
+
   
 
 
