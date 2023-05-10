@@ -129,7 +129,7 @@ nav ul li a:hover {
 .btn {
     /* estilos anteriores */
     top: calc(57% + 250px);
-    left: calc(20% + 20px);
+    left: calc(10% + 20px);
 }
 @media screen and (max-width: 768px) {
     /* Estilos para pantallas más pequeñas */
@@ -245,11 +245,13 @@ h1 {
 }
 @media screen and (max-width: 768px) {
   .btn {
-    top: calc(57% + 50px);
+    top: calc(65% + 50px);
     left: 50%;
     transform: translate(-50%, -50%);
   }
 }
+
+
 
 
 
