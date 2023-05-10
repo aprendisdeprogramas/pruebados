@@ -1,5 +1,6 @@
+
 body, html {
-  background-image: url(img/img2.png);
+  background-image: url(img/img5.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position-y: 50px;
@@ -75,6 +76,7 @@ nav ul li a:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     transition: transform 0.3s ease;
+    border-radius: 15px;
 }
 
 .btn:hover {
@@ -83,8 +85,8 @@ nav ul li a:hover {
 }
 .btn {
     /* estilos anteriores */
-    top: calc(50% + 250px);
-    left: calc(18% + 20px);
+    top: calc(57% + 250px);
+    left: calc(17% + 20px);
 }
 @media screen and (max-width: 768px) {
     /* Estilos para pantallas más pequeñas */
@@ -178,3 +180,31 @@ nav ul li a:hover {
   background-color: #00c5cd;
   transform: scale(1.1);
 }
+body {
+  background-image: url('ruta/de/tu/imagen/de/fondo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+h1 {
+  font-size: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+
+
+  
+
+
+  
+  
+    
+
+
+
+
+
