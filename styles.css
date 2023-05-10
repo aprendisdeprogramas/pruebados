@@ -1,193 +1,146 @@
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
-body, html {
-  background-image: url(img/img2.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position-y: 50px;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5em;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-header {
-  background-color: black;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1;
-}
+const particles = [];
 
-.logo img {
-  height: 50px;
-}
-
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: flex-start; /* Alinea los elementos a la izquierda */
-  align-items: center;
-  padding-left: 20px; /* Agrega un poco de padding al lado izquierdo */
-}
-
-nav ul li {
-  margin: 0 20px; /* Aumenta la separación horizontal */
-}
-
-nav ul li a {
-  display: inline-block;
-  background-color: black;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
-  padding: 10px 20px;
-  border: 2px solid white;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  margin-right: 20px; /* Agrega separación adicional entre elementos */
-}
-
-nav ul li a:hover {
-  background-color: #00c5cd;
-}
-.btn {
-    background-color: #00c5cd;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 10px 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: transform 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #22a7af;
-    transform: translate(-50%, -50%) scale(1.5);
-}
-.btn {
-    /* estilos anteriores */
-    top: calc(50% + 250px);
-    left: calc(18% + 20px);
-}
-@media screen and (max-width: 768px) {
-    /* Estilos para pantallas más pequeñas */
-    .logo img {
-      height: 40px;
+class Particle {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 5 + 1;
+        this.speedX = Math.random() * 3 - 1.5;
+        this.speedY = Math.random() * 3 - 1.5;
     }
-  
-    nav ul li {
-      margin: 0 5px;
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.size > 0.2) this.size -= 0.1;
     }
-  
-    nav ul li a {
-      font-size: 16px;
-      padding: 10px;
+
+    draw() {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
     }
-  
-    .btn {
-      font-size: 14px;
-      padding: 8px 16px;
+}
+
+function createParticles(e) {
+    const xPos = e.clientX;
+    const yPos = e.clientY;
+
+    for (let i = 0; i < 5; i++) {
+        particles.push(new Particle(xPos, yPos));
     }
-    .btn {
-        /* estilos anteriores */
-        border-radius: 20px;
+}
+
+function handleParticles() {
+    for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        if (particles[i].size <= 0.3) {
+            particles.splice(i, 1);
+            i--;
+        }
     }
-    
-  }
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-nav ul li a {
-  display: inline-block;
-  background-color: black;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
-  padding: 10px 20px;
-  border: 2px solid white;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-nav ul li a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-nav ul li:not(:last-child) {
-    margin-right: 10px;
-}
-nav ul {
-  /* Estilos anteriores */
-  position: relative;
 }
 
-.nav-link {
-  /* Nuevos estilos */
-  color: white;
-  position: relative;
-  z-index: 1;
+canvas.addEventListener('mousemove', createParticles);
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    createParticles(e.touches[0]);
+});
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    handleParticles();
+    requestAnimationFrame(animate);
 }
 
-.nav-link::before {
-  /* Nuevos estilos */
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: scale(0.8);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  z-index: -1;
-}
+animate();
+const navLinks1 = document.querySelectorAll('.nav-link');
 
-.nav-link:hover::before {
-  /* Nuevos estilos */
-  transform: scale(1);
-  opacity: 1;
-}
-
-.nav-link:active {
-  /* Nuevos estilos */
-  transform: scale(1.2);
-}
-nav ul li a:hover {
-  background-color: #00c5cd;
-  transform: scale(1.1);
-}
+navLinks.forEach((link) => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href');
+    const target = document.querySelector(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
 
 
 
-  
+const nav = document.querySelector('nav');
+const navLinks = nav.querySelectorAll('a');
+const sections = document.querySelectorAll('.container > section');
+
+function setActiveLink(index) {
+    navLinks.forEach(link => link.classList.remove('active'));
+    navLinks[index].classList.add('active');
+}
+
+function scrollHandler() {
+    const scrollTop = window.pageYOffset;
+
+    sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+            setActiveLink(index);
+        }
+    });
+}
+
+window.addEventListener('scroll', scrollHandler);
+
+navLinks.forEach((link, index) => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const sectionTop = sections[index].offsetTop;
+
+        window.scrollTo({
+            top: sectionTop,
+            behavior: 'smooth'
+        });
+
+        setActiveLink(index);
+        
+    });
+});
 
 
-  
-  
-    
+
+window.addEventListener('scroll', scrollHandler);
+
+navLinks.forEach((link, index) => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const sectionTop = sections[index].offsetTop;
+
+        window.scrollTo({
+            top: sectionTop,
+            behavior: 'smooth'
+        });
+
+        setActiveLink(index);
+    });
+});
 
 
 
