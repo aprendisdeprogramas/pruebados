@@ -56,30 +56,10 @@ function handleParticles() {
 }
 
 canvas.addEventListener('mousemove', createParticles);
-let isTouchDevice = 'ontouchstart' in window || navigator.msMaxTouchPoints;
-
-if (isTouchDevice) {
-    canvas.addEventListener('touchstart', () => {
-        isMouseDown = true;
-    });
-
-    canvas.addEventListener('touchend', () => {
-        isMouseDown = false;
-    });
-
-    canvas.addEventListener('touchmove', (e) => {
-        createParticles(e.touches[0]);
-    });
-} else {
-    canvas.addEventListener('mousedown', () => {
-        isMouseDown = true;
-    });
-
-    canvas.addEventListener('mouseup', () => {
-        isMouseDown = false;
-    });
-}
-
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    createParticles(e.touches[0]);
+});
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -88,6 +68,20 @@ function animate() {
 }
 
 animate();
+const navLinks1 = document.querySelectorAll('.nav-link');
+
+navLinks.forEach((link) => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href');
+    const target = document.querySelector(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+
 
 const nav = document.querySelector('nav');
 const navLinks = nav.querySelectorAll('a');
@@ -125,8 +119,30 @@ navLinks.forEach((link, index) => {
         });
 
         setActiveLink(index);
+        
     });
 });
+
+
+
+window.addEventListener('scroll', scrollHandler);
+
+navLinks.forEach((link, index) => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const sectionTop = sections[index].offsetTop;
+
+        window.scrollTo({
+            top: sectionTop,
+            behavior: 'smooth'
+        });
+
+        setActiveLink(index);
+    });
+});
+
+
 
 
 
